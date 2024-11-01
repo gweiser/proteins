@@ -33,12 +33,14 @@ def sort_triplets(rna_sequence):
             end_index = triplets_unsorted.index(i)
             break
     # Cut out unnecessary organic bases from RNA
-    triplets_sorted = triplets_unsorted[start_index+1:end_index]
+    triplets = triplets_unsorted[start_index+1:end_index]
 
-    return triplets_sorted
+    return triplets
 
 
-
+def get_amino_acids(triplets):
+    """Get amino acids corresponding to organic base triplets in the sorted RNA"""
+    
 
 
 def main():
