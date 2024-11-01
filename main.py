@@ -14,6 +14,7 @@ def convert(dna_sequence):
             case "C":
                 rna_sequence.append("G")
 
+    
     return "".join(rna_sequence)
 
 
@@ -33,20 +34,88 @@ def sort_triplets(rna_sequence):
             end_index = triplets_unsorted.index(i)
             break
     # Cut out unnecessary organic bases from RNA
-    triplets = triplets_unsorted[start_index+1:end_index]
+    triplets = triplets_unsorted[start_index:end_index]
 
     return triplets
 
 
 def get_amino_acids(triplets):
     """Get amino acids corresponding to organic base triplets in the sorted RNA"""
-    
+    amino_acids = []
+    for triplet in triplets:
+        # Go through every base in triplet, add equivalent amino acid to list (RNA code table)
+        match triplet[0]:
+            case "G": 
+                match triplet[1]:
+                    case "G": 
+                        amino_acids.append("Glys")                                                   
+                    case "U":
+                        amino_acids.append("Val")
+                    case "A":
+                        if triplet[2] == "A" or "G":
+                            amino_acids.append("Glu")
+                        else:
+                            amino_acids.append("Asp")
+                    case "C":         
+                        amino_acids.append("Ala")                                      
+            case "U":
+                match triplet[1]:
+                    case "G":
+                        if triplet[2] == "G":
+                            amino_acids.append("Trp") 
+                        else:
+                            amino_acids.append("Cys")                           
+                    case "U":
+                        if triplet[2] == "A" or "G":
+                            amino_acids.append("Leu")
+                        else:
+                            amino_acids.append("Phe")
+                    case "A":
+                        amino_acids.append("Tyr")
+                    case "C":              
+                        amino_acids.append("Ser")      
+            case "A":
+                match triplet[1]:
+                    case "G":     
+                        if triplet[2] == "A" or "G":
+                            amino_acids.append("Arg")
+                        else:
+                            amino_acids.append("Ser")                       
+                    case "U":
+                        if triplet[2] == "G":
+                            amino_acids.append("Met")
+                        else:
+                            amino_acids.append("Ile")
+                    case "A":
+                        if triplet[2] == "A" or "G":
+                            amino_acids.append("Lys")
+                        else:
+                            amino_acids.append("Asn")
+                    case "C":           
+                        amino_acids.append("Thr")         
+            case "C":
+                match triplet[1]:
+                    case "G":      
+                        amino_acids.append("Arg")                      
+                    case "U":
+                        amino_acids.append("Leu")
+                    case "A":
+                        if triplet[2] == "A" or "G":
+                            amino_acids.append("Gln")
+                        else:
+                            amino_acids.append("His")
+                    case "C":                    
+                        amino_acids.append("Pro")
+
+    return amino_acids
+
 
 
 def main():
-    dna_sequence = "TACGGGTTTCCCATTGCT"
+    dna_sequence = "TACACGAGCGATTCTATT"
 
-    print(sort_triplets(convert(dna_sequence)))
+    triplets = sort_triplets(convert(dna_sequence))
+    print(get_amino_acids(triplets))
 
 
 
