@@ -1,4 +1,5 @@
 from textwrap import wrap
+
 def convert(dna_sequence):
     """Convert DNA sequence to RNA equivalent"""
     rna_sequence = []
