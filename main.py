@@ -112,11 +112,16 @@ def get_amino_acids(triplets):
 
 
 def main():
-    dna_sequence = "TACACGAGCGATTCTATT"
+    # dna_sequence = "TACACGAGCGATTCTATT"
+    input_method = input("Inputting RNA or DNA? (R/D) ")
 
-    triplets = sort_triplets(convert(dna_sequence))
-    print(get_amino_acids(triplets))
-
-
+    if input_method.upper() == "R":
+        rna = input("RNA sequence: ")
+        print(get_amino_acids(sort_triplets(rna)))
+    elif input_method.upper() == "D":
+        dna = input("DNA sequence: ")
+        print(get_amino_acids(sort_triplets(convert(dna))))
+    
+        
 
 main()
