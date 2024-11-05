@@ -23,17 +23,22 @@ def sort_triplets(rna_sequence):
     """Sort triplets to start and end properly"""
     # Split RNA into triplets
     triplets_unsorted = wrap(rna_sequence, 3)
-
+    print(triplets_unsorted)
     
-    start_triplet = "AUG"
+    start_triplets = ["AUG", "GUG"]
     end_triplets = ["UAA", "UAG", "UGA"]
 
     # Find indices for start and end of useable RNA 
-    start_index = triplets_unsorted.index(start_triplet)
+    for i in triplets_unsorted:
+        if i in start_triplets:
+            start_index = triplets_unsorted.index(i)
+            break    
+
     for i in triplets_unsorted:
         if i in end_triplets:
             end_index = triplets_unsorted.index(i)
             break
+
     # Cut out unnecessary organic bases from RNA
     triplets = triplets_unsorted[start_index:end_index]
 
